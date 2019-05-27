@@ -1,0 +1,43 @@
+apply from: './versions.gradle'
+apply plugin: 'war'
+
+group = 'com.sunny.sysdesign.service.consistenthashing'
+archivesBaseName = 'consistenthashing-service'
+version="1.0.1"
+
+
+repositories{
+   mavenCentral()
+   maven { url 'https://repository.apache.org/snapshots' }
+}
+
+war {
+	archiveName = "consistenthashing-service.war"
+}
+
+
+dependencies {
+    def withoutRibbion = { exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-ribbon' }
+
+	compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")	
+	compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")	
+	compile("org.springframework.boot:spring-boot-starter-tomcat:$springBootVersion")
+	
+    compile "org.springframework.cloud:spring-cloud-starter-hystrix:$springCloudHysterix", withoutRibbion
+	compile("org.springframework.security:spring-security-taglibs:$springSecurityVersion")
+	compile "org.springframework.retry:spring-retry:$springRetryVersion"
+    
+    compile ("com.google.guava:guava:$guavaVersion")
+
+  
+    compile fileTree(include: ['*.jar'], dir: 'lib')
+	
+    testCompile "com.sun.mail:javax.mail:1.5.6"
+	testCompile "org.mockito:mockito-all:$mockitoVersion"
+	testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+	testCompile "org.springframework.security:spring-security-test:$springSecurityVersion"
+	testCompile ("junit:junit:$junitVersion")
+}
+
+
+defaultTasks 'clean', 'build', 'check', 'test'

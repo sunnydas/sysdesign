@@ -1,0 +1,12 @@
+ext{
+	guavaVersion="21.0"
+	springCloudFeign="1.2.6.RELEASE"
+	springCloudHysterix="1.2.6.RELEASE"
+	springBootVersion="2.1.5.RELEASE"
+	springRetryVersion="1.2.4.RELEASE"
+	springSecurityVersion="5.1.5.RELEASE"
+	sl4jVersion="1.2"
+	log4jVersion="2.11.2"
+	mockitoVersion='2.27.0'
+	junitVersion='4.12'
+}
